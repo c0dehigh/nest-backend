@@ -10,7 +10,9 @@ import {
   Body,
   ParseIntPipe,
   DefaultValuePipe,
+  ValidationPipe,
 } from '@nestjs/common';
+import { CreateUserDto } from './dtos/create-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -22,15 +24,12 @@ export class UsersController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe)
     page: number | undefined,
   ) {
-    console.log(limit);
-    console.log(page);
-
     return 'You sent a GET request to /users endpoints';
   }
 
   @Post()
-  public createUsers(@Body() body: any) {
-    console.log(body);
+  public createUsers(@Body() CreateUserDto: CreateUserDto) {
+    console.log(CreateUserDto);
 
     return 'You sent a POST request to /users endpoints';
   }
